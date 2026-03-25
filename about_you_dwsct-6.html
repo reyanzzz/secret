@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About You ✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;font-family:'Poppins',sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;color:#0f172a;overflow:hidden}
+
+    #bg-video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;filter:brightness(.7)}
+    .overlay{position:fixed;inset:0;background:rgba(255,255,255,.15);backdrop-filter:blur(4px);z-index:-1}
+
+    .card{
+      width:90%;max-width:650px;
+      background:rgba(255,255,255,.6);
+      backdrop-filter:blur(12px);
+      padding:30px 20px;
+      border-radius:24px;
+      text-align:center;
+      box-shadow:0 20px 60px rgba(0,0,0,.25);
+    }
+
+    .title{font-family:'Playfair Display',serif;font-size:2.5rem;margin:0}
+    .subtitle{opacity:.8;margin-top:6px}
+
+    .quotes{margin-top:20px;min-height:120px;position:relative}
+
+    .quote{
+      position:absolute;
+      width:100%;
+      opacity:0;
+      transform:scale(.95) translateY(10px);
+      transition:opacity 1s ease, transform 1s ease;
+      background:rgba(255,255,255,.85);
+      padding:16px;
+      border-radius:14px;
+      box-shadow:0 10px 24px rgba(0,0,0,.12);
+      border-left:4px solid #f472b6;
+      font-style:italic;
+    }
+
+    .quote.active{
+      opacity:1;
+      transform:scale(1) translateY(0);
+      z-index:1;
+    }
+
+    .love-rain{position:fixed;inset:0;pointer-events:none}
+    .heart{position:absolute;color:#fb7185;animation:fall linear forwards}
+    @keyframes fall{0%{transform:translateY(-10%)}100%{transform:translateY(110vh);opacity:0}}
+
+    .credit{position:fixed;bottom:10px;left:10px;color:#fff;font-size:12px;background:rgba(0,0,0,.4);padding:5px 10px;border-radius:10px}
+  </style>
+</head>
+<body>
+
+<video autoplay muted loop id="bg-video">
+  <source src="41d7a571adff8287cd39220b04c42169.mp4" type="video/mp4">
+</video>
+<div class="overlay"></div>
+
+<div class="love-rain"></div>
+
+<div class="card">
+  <h1 class="title">dwsct</h1>
+  <p class="subtitle">About You</p>
+
+  <div class="quotes">
+    <div class="quote active">"jatuh cinta padamu adalah ketidaksengajaan yang jauh lebih indah dari ribuan hal yang pernah aku rencanakan"</div>
+    <div class="quote">"meskipun tidak sempat memilikinya, terimakasih atas bahagianya"</div>
+    <div class="quote">"cinta ga selalu tentang memiliki, kadang hanya mengagumi"</div>
+    <div class="quote">"di dunia ini ada manusia yang bisa dikagumi tapi tidak dimiliki"</div>
+    <div class="quote">"bagian paling menyenangkan dari hidup adalah bertemu denganmu"</div>
+  </div>
+</div>
+
+<div class="credit">created by R</div>
+
+<audio autoplay loop>
+  <source src="The 1975 - About You (Official).mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const quotes=document.querySelectorAll('.quote');
+let index=0;
+
+setInterval(()=>{
+  quotes[index].classList.remove('active');
+  index=(index+1)%quotes.length;
+  quotes[index].classList.add('active');
+},4000);
+
+const loveRain=document.querySelector('.love-rain');
+function createHeart(){
+  const h=document.createElement('div');
+  h.className='heart';
+  h.innerHTML='❤';
+  h.style.left=Math.random()*100+'vw';
+  h.style.fontSize=(Math.random()*10+10)+'px';
+  h.style.animationDuration=(Math.random()*3+3)+'s';
+  loveRain.appendChild(h);
+  setTimeout(()=>h.remove(),5000);
+}
+setInterval(createHeart,300);
+</script>
+
+</body>
+</html>
